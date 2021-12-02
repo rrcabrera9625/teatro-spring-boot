@@ -24,13 +24,12 @@ public class Teatro {
 
     @Column(name = "nombre") 
     private String nombre;
+    
+    @Column(name = "cantidadbutacas") 
+    private String cantidadbutacas;
 
 	@OneToMany(mappedBy = "teatro", fetch = FetchType.EAGER)
     private Set<Butaca> butacas;
-
-    public int cantidadButacas(){
-        return butacas.size();
-    }
 
     public Teatro() {
     }
