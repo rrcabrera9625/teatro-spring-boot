@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:9.6
+    volumes:
+      - ./data/db:/var/lib/postgresql
+    environment:
+      - POSTGRES_DB=teatro-spring-boot
+      - POSTGRES_USER=posgrado
+      - POSTGRES_PASSWORD=posgrado
+    ports:
+      - 5432:5432  

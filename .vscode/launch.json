@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-TeatroApplication<teatro>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.curso.springboot.teatro.TeatroApplication",
+            "projectName": "teatro",
+            "args": ""
+        }
+    ]
+}
