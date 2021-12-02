@@ -26,7 +26,7 @@ public class Teatro {
     private String nombre;
     
     @Column(name = "cantidadbutacas") 
-    private String cantidadbutacas;
+    private int cantidadbutacas;
 
 	@OneToMany(mappedBy = "teatro", fetch = FetchType.EAGER)
     private Set<Butaca> butacas;
