@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Formulario</title>
+        <meta http-equiv="Content-Type" content="text/html; charset-UTF-8/">
+    </head>
+    <body>
+        <form method="POST" th:action="@{/enviar}">
+            <input placeholder="Nombre(s)" name="name"/><br/>
+            <input placeholder="Apellidos" name="lastname"/><br/>
+            <input placeholder="Edad" name="age"/><br/>
+            <input type="submit" value="enviar"/>
+        </form>      
+        <div th:if="${name != null && lastname != null}">
+            El usuario: 
+            <span th:text="${name + ' ' + lastname + ' nació en un año:' + ' ' + isLeap + '.' }"></span>
+        </div>
+    </body>
+</html>
