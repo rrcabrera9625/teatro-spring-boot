@@ -49,7 +49,7 @@ public class UsuarioService {
 	}
 
 	// FIND BY USERNAME
-	public Optional<Usuario> obtenerUsuarioPorUsurio(String usuario) {
+	public Optional<Usuario> obtenerPorUsuario(String usuario) {
 		return usuarioRepository.findByUsuario(usuario);
 	}
 

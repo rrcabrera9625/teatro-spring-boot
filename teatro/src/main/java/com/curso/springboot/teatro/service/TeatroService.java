@@ -7,7 +7,9 @@ import com.curso.springboot.teatro.model.Teatro;
 import com.curso.springboot.teatro.repository.TeatroRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TeatroService {
 
     @Autowired
