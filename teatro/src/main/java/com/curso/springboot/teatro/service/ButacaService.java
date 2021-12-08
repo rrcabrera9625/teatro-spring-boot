@@ -18,7 +18,7 @@ public class ButacaService {
     // CREATE
 	public Butaca crearButaca(Butaca butacaRequest) {
 		Butaca newButaca = new Butaca();
-		newButaca.setId(butacaRequest.getId());
+		newButaca.setButaca(butacaRequest.getButaca());
 		newButaca.setTipo_butaca(butacaRequest.getTipo_butaca());
         if (newButaca.getTipo_butaca()==1){
             newButaca.setProtocolo(butacaRequest.getProtocolo());
@@ -38,8 +38,8 @@ public class ButacaService {
 	}
 
 	// VENDER
-	public void venderButaca(int id) {
-		Butaca butaca = butacaRepository.findById(id).get();
+	public void venderButaca(String id) {
+		Butaca butaca = butacaRepository.findByButaca(id).get();
         butaca.vender();
 		butacaRepository.save(butaca);
 	}

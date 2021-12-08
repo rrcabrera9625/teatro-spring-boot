@@ -42,20 +42,43 @@
                             </thead>
                             <tbody>
                                 <tr th:if="${butacas.empty}">
-                                    <td colspan="2"> No hay Butacas creadas </td>
+                                    <td colspan="7"> No hay Butacas creadas </td>
                                 </tr>
                                 <tr th:each="butaca : ${butacas}">
-                                    <td><span th:text="${butaca.id}"> Identificador </span></td>
+                                    <td><span th:text="${butaca.butaca}"> Identificador </span></td>
                                     <td><span th:text="${butaca.tipo_butaca}"> tipo_butaca </span></td>
                                     <td><span th:text="${butaca.areafumadores}"> areafumadores </span></td>
                                     <td><span th:text="${butaca.numerobalcon}"> numerobalcon </span></td>
                                     <td><span th:text="${butaca.protocolo}"> protocolo </span></td><br/>
                                     <td><span th:text="${butaca.vendida}"> vendida </span></td>
-                                    <td class="d-flex justify-content-center">
-                                        <span data-toggle="modal" th:attr="data-target='#update' + ${butaca.id}"><i class='far fa-edit mr-3 flex-fill' data-toggle="tooltip" data-placement="bottom" title="Editar"></i></span>
-                                        <span data-toggle="modal" th:attr="data-target='#view' + ${butaca.id}"><i class='far fa-eye mr-3 flex-fill' data-toggle="tooltip" data-placement="bottom" title="Ver"></i></span>
-                                        <span data-toggle="modal" th:attr="data-target='#delete' + ${butaca.id}"><i class='fas fa-trash mr-3 flex-fill' style='color:red' data-toggle="tooltip" data-placement="bottom" title="Eliminar"></i></span>  
+                                    <td th:if="${butaca.vendida}" class="d-flex justify-content-center">
+                                        <span data-toggle="modal"><i class='fas fa-money-check-alt mr-3 flex-fill' disable data-toggle="tooltip" data-placement="bottom" title="Vender"></i></span>  
+                                     </td>
+                                    <td th:unless="${butaca.vendida}"class="d-flex justify-content-center">
+                                       <span data-toggle="modal" th:attr="data-target='#sell' + ${butaca.butaca}"><i class='fas fa-money-check-alt mr-3 flex-fill' style='color:green' data-toggle="tooltip" data-placement="bottom" title="Vender"></i></span>  
                                     </td>
+                                    <div class="modal fade" th:attr="id='sell' + ${butaca.butaca}">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                              <h4 class="modal-title">Vender Butaca</h4>
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <form method="POST" th:action="@{${teatro.id} + '/vender/' + ${butaca.butaca}}">
+                                                <h6>Está seguro que desea vender la butaca?</h6> 
+                                            </div>
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                              <button class="btn btn-default btn-success"  type="submit" name="submit" value="Crear">Guardar</button>
+                                            </div>
+                                                </form> 
+                                          </div>
+                                        </div>
+                                    </div>
                                 </tr>
                             </tbody> 
                         </table>

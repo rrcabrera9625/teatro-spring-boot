@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ButacaController {
-
+    
     @Autowired
     public ButacaService butacaService;
 
@@ -31,7 +31,7 @@ public class ButacaController {
     @PostMapping("index/butacas/{teatroid}")
     public String crearButaca(@PathVariable(value = "teatroid") int teatroid,  Model model, String id, int tipo_butaca, int numerobalcon, boolean vendida, boolean areafumadores, boolean protocolo){
         Butaca newButaca = new Butaca();
-        newButaca.setId(id);
+        newButaca.setButaca(id);
         newButaca.setTipo_butaca(tipo_butaca);
         newButaca.setNumerobalcon(numerobalcon);
         newButaca.setAreafumadores(areafumadores);
@@ -43,6 +43,15 @@ public class ButacaController {
         model.addAttribute("teatro", obtenerTeatro(teatroid));
         return "butacas";
     }
+
+    @PostMapping("index/butacas/{teatroid}/vender/{id}")
+    public String venderButaca(@PathVariable(value = "id") String id, @PathVariable(value = "teatroid") int teatroid, Model model){
+        butacaService.venderButaca(id);
+        model.addAttribute("butacas", butacaService.listarButacas(teatroid));
+        model.addAttribute("teatro", obtenerTeatro(teatroid));
+        return "butacas";
+    }
+
 
     public Teatro obtenerTeatro(int id){
         Teatro teatro = teatroService.obtenerTeatroPorId(id).get();

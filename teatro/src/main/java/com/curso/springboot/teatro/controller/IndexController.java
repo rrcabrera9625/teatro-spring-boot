@@ -56,8 +56,9 @@ public class IndexController {
         for (Teatro teatro:teatros){
             for(Butaca butaca: teatro.getButacas()){
                 if (butaca.getVendida()){
-                    if (butaca.getAreafumadores()){
-                        recaudo += recaudo + butaca.precio();
+                    if (butaca.getAreafumadores()!=null){
+                        if (butaca.getAreafumadores())
+                            recaudo += recaudo + butaca.precio();
                     }
                 }
             }
