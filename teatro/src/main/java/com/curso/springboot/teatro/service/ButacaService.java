@@ -6,7 +6,9 @@ import com.curso.springboot.teatro.model.Butaca;
 import com.curso.springboot.teatro.repository.ButacaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ButacaService {
 
     @Autowired
@@ -31,8 +33,8 @@ public class ButacaService {
 	}
 
 	// READ
-	public List<Butaca> listarButacas() {
-		return butacaRepository.findAll();
+	public List<Butaca> listarButacas(int id) {
+		return butacaRepository.findByTeatroId(id);
 	}
 
 	// VENDER

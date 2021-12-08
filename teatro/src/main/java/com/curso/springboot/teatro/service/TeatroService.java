@@ -1,6 +1,7 @@
 package com.curso.springboot.teatro.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.curso.springboot.teatro.model.Butaca;
 import com.curso.springboot.teatro.model.Teatro;
@@ -26,6 +27,11 @@ public class TeatroService {
 	// READ
 	public List<Teatro> listarTeatros() {
 		return teatroRepository.findAll();
+	}
+
+	// POR ID
+	public Optional<Teatro> obtenerTeatroPorId(int id){
+		return teatroRepository.findById(id);
 	}
 
 	// VENDIDAS

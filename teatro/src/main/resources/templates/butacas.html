@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="'Butacas Teatro ' + ${teatro.nombre}"> </title>
+        <meta http-equiv="Content-Type" content="text/html; charset-UTF-8/">
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <a class="navbar-brand" href="/index">Inicio</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>  
+          </nav>
+        <tbody>
+            <div class="container" style="margin-top:30px">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 th:text="'Butacas Teatro ' + ${teatro.nombre}"></h2>
+                        <div class="row">
+                            
+                            <div class="col-lg-8 d-flex justify-content-start">
+                                <p> Existen <span th:text="${butacas.size}"> Contador </span> Butacas registradas hasta ahora en este teatro. </p>
+                            </div>
+                            <div class="col-lg-4 d-flex justify-content-end">
+                                <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#create"><i class='fas fa-plus' style='color:white'></i> Nueva Butaca</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Identificador</th>
+                                    <th>Tipo</th>
+                                    <th>Area Fumadores</th>
+                                    <th>Numero de Balcon</th>
+                                    <th>Protocolo</th>
+                                    <th>Vendida</th>
+                                    <th>Operaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:if="${butacas.empty}">
+                                    <td colspan="2"> No hay Butacas creadas </td>
+                                </tr>
+                                <tr th:each="butaca : ${butacas}">
+                                    <td><span th:text="${butaca.id}"> Identificador </span></td>
+                                    <td><span th:text="${butaca.tipo_butaca}"> tipo_butaca </span></td>
+                                    <td><span th:text="${butaca.areafumadores}"> areafumadores </span></td>
+                                    <td><span th:text="${butaca.numerobalcon}"> numerobalcon </span></td>
+                                    <td><span th:text="${butaca.protocolo}"> protocolo </span></td><br/>
+                                    <td><span th:text="${butaca.vendida}"> vendida </span></td>
+                                    <td class="d-flex justify-content-center">
+                                        <span data-toggle="modal" th:attr="data-target='#update' + ${butaca.id}"><i class='far fa-edit mr-3 flex-fill' data-toggle="tooltip" data-placement="bottom" title="Editar"></i></span>
+                                        <span data-toggle="modal" th:attr="data-target='#view' + ${butaca.id}"><i class='far fa-eye mr-3 flex-fill' data-toggle="tooltip" data-placement="bottom" title="Ver"></i></span>
+                                        <span data-toggle="modal" th:attr="data-target='#delete' + ${butaca.id}"><i class='fas fa-trash mr-3 flex-fill' style='color:red' data-toggle="tooltip" data-placement="bottom" title="Eliminar"></i></span>  
+                                    </td>
+                                </tr>
+                            </tbody> 
+                        </table>
+                        </div> 
+                   </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 mx-5">
+                    </div>
+                </div>
+              </div>
+            
+            </tbody>
+            <div class="jumbotron text-center" style="margin-bottom:0">
+                <p>by Ing. Raisel Rodríguez Cabrera</p>
+                <p>2021</p>
+              </div>
+            <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+            <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+            <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+    </body>
+<div class="modal fade" id="create">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Adicionar Butaca</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form method="POST" th:action="@{'/index/butacas/' + ${teatro.id}}">
+              <input class="form-control" placeholder="Identificador" name="id"/><br/>
+                <select class="form-control mb-4" name="tipo_butaca">
+                    <option th:value="1">Balcon</option>
+                    <option th:value="2">Platea</option>
+                <input class="form-control" placeholder="Numero de Balcon" name="numerobalcon"/><br/>
+                <div class="form-check col-lg-12">
+                    <div class="form-check col-lg-12">
+                        <div class="form-check col-lg-6">
+                            <input type="checkbox" class="form-check-input" name="areafumadores">
+                            <label class="form-check-label" for="areafumadores">Fumadores</label>
+                        </div>    
+                        <div class="form-check col-lg-6">
+                            <input type="checkbox" class="form-check-input" name="protocolo">
+                            <label class="form-check-label" for="protocolo">Protocolo</label>
+                        </div>
+                        <div class="form-check col-lg-6">
+                            <input type="checkbox" class="form-check-input" name="vendida">
+                            <label class="form-check-label" for="vendida">Vendida</label>
+                        </div>    
+                    </div>
+                  </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          <button class="btn btn-default btn-success"  type="submit" name="submit" value="Crear">Guardar</button>
+        </div>
+            </form> 
+      </div>
+    </div>
+</div>
+</html>

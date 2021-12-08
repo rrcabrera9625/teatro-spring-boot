@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
@@ -20,6 +21,19 @@ public class IndexController {
 
     @GetMapping("/index")
     public String showIndex(Model model) {
+        model.addAttribute("teatros", teatroService.listarTeatros());
+        model.addAttribute("recaudo", recaudo());
+        model.addAttribute("vendidas", vendidas());
+        model.addAttribute("recaudoFumadores", recaudoFumadores());
+        return "index";
+    }
+
+    @PostMapping("/index/crear-teatro")
+    public String crear(Model model, String nombre, int cantidadbutacas) {
+        Teatro newTeatro = new Teatro();
+        newTeatro.setNombre(nombre);
+        newTeatro.setCantidadbutacas(cantidadbutacas);
+        teatroService.crearTeatro(newTeatro);
         model.addAttribute("teatros", teatroService.listarTeatros());
         model.addAttribute("recaudo", recaudo());
         model.addAttribute("vendidas", vendidas());

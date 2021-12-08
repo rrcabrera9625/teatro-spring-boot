@@ -17,7 +17,7 @@ import lombok.Setter;
 public class Butaca {
 
     @Id @Column(name = "BUTACA_ID")
-	private int id;
+	private String id;
 
     @Column(name = "tipo_butaca")
     private int tipo_butaca;
